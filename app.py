@@ -10,10 +10,12 @@ from routes.rsvps import rsvps_bp
 import yaml
 import os
 
-def create_app():
+def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object(Config)
-    
+    if test_config:
+        app.config.update(test_config)
+
     # Initialize extensions
     db.init_app(app)
     CORS(app)
