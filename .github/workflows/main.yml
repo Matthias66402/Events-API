@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone/Checkout Code
+      uses: docker/setup-buildx-action@v4
+
+    - name: Set Up Docker
+      uses: docker/setup-buildx-action@v4
+
+    - name: Build Docker Image
+      run: docker build -t events-api .
+
+    - name: Run Container
+      run: docker run -d -p 5001:5001 --name events-api-container events-ap
+
+    - name: Set up Python
+      uses: actions(setup-python@v7
+      with:
+        python-version: '3.11'
+
+    - name: Install Requirements
+      run pip install --no-cache-dir -r requirements.txt
+
+    - name: Run Tests
+      run: pytest -v
+
+    - name: Stop And Remove Containers
+      if: always()
+      run: |
+        docker stop events-api-conainer
+        docker rm events-api-container
+    
