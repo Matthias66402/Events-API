@@ -2,7 +2,7 @@ import uuid
 import requests
 import pytest
 
-BASE_URL = "http://localhost:5000"
+BASE_URL = "http://localhost:5001"
 
 
 class HttpTestClient:

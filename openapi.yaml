@@ -10,7 +10,7 @@ info:
     email: support@example.com
 
 servers:
-  - url: http://localhost:5000
+  - url: http://localhost:5001
     description: Local development server
   - url: https://api.example.com
     description: Production server
