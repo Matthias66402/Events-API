@@ -21,7 +21,7 @@ jobs:
       run: docker build -t events-api .
 
     - name: Run Container
-      run: docker run -d -p 5001:5001 --name events-api-container events-api
+      run: docker run -d -p 5000:5000 --name events-api-container events-api
 
     - name: Set up Python
       uses: actions/setup-python@v7
