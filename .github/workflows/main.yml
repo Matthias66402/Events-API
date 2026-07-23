@@ -21,15 +21,15 @@ jobs:
       run: docker build -t events-api .
 
     - name: Run Container
-      run: docker run -d -p 5001:5001 --name events-api-container events-ap
+      run: docker run -d -p 5001:5001 --name events-api-container events-api
 
     - name: Set up Python
-      uses: actions(setup-python@v7
+      uses: actions/setup-python@v7
       with:
         python-version: '3.11'
 
     - name: Install Requirements
-      run pip install --no-cache-dir -r requirements.txt
+      run: pip install --no-cache-dir -r requirements.txt
 
     - name: Run Tests
       run: pytest -v
@@ -37,6 +37,6 @@ jobs:
     - name: Stop And Remove Containers
       if: always()
       run: |
-        docker stop events-api-conainer
+        docker stop events-api-container
         docker rm events-api-container
     
