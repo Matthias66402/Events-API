@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: Clone/Checkout Code
-      uses: docker/setup-buildx-action@v4
+      uses: actions/checkout@v4 
 
     - name: Set Up Docker
-      uses: docker/setup-buildx-action@v4
+      uses: actions/setup-python@v5
 
     - name: Build Docker Image
       run: docker build -t events-api .
