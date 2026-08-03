@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
     - name: Clone/Checkout Code
@@ -18,10 +19,10 @@ jobs:
       uses: actions/setup-python@v5
 
     - name: Build Docker Image
-      run: docker build -t events-api .
+      run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/events-api:amd64 --production linux/amd64 .
 
     - name: Run Container
-      run: docker run -d -p 5001:5001 --name events-api-container events-api
+      run: docker run -d -p 5001:5001 --name events-api-container ${{ vars.DOCKERHUB_USERNAME }}/events-api:amd64
 
     - name: Set up Python
       uses: actions/setup-python@v7
@@ -39,4 +40,9 @@ jobs:
       run: |
         docker stop events-api-container
         docker rm events-api-container
-    
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v4
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
