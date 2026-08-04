@@ -53,3 +53,8 @@ jobs:
 
     - name: Deploy to Cloud
       run: curl ${{ secrets.RENDER_HOOK }}
+
+    - name: Test API in cloud
+      run: |
+        sleep 30
+        curl ${{ secrets.RENDER_HOOK }}/api/health
