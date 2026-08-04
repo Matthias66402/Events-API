@@ -53,7 +53,7 @@ def create_app(test_config=None):
     def root():
         return jsonify({
             'name': 'Evently API',
-            'version': '1.0.0',
+            'version': '1.0.1',
             'description': 'A Flask-based REST API for managing events and RSVPs with different access levels',
             'documentation': {
                 'swagger_ui': '/apidocs',
