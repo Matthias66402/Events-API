@@ -47,9 +47,9 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-#
-#    - name: Push Image to Docker Hub
-#      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/polls-api:amd64
+
+    - name: Push Image to Docker Hub
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/polls-api:amd64
 #
 #    - name: Deploy to Cloud
 #      run: curl ${{ secrets.RENDER_HOOK }}
