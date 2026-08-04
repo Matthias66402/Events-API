@@ -49,19 +49,19 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
-    - name: Debug secret length
-      run: |
-        echo "username length: ${#DOCKERHUB_USERNAME}"
-        echo "token length: ${#DOCKERHUB_TOKEN}"
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Push Image to Docker Hub
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/polls-api:amd64
-
-    - name: Deploy to Cloud
-      run: curl ${{ secrets.RENDER_HOOK }}
+#    - name: Debug secret length
+#      run: |
+#        echo "username length: ${#DOCKERHUB_USERNAME}"
+#        echo "token length: ${#DOCKERHUB_TOKEN}"
+#      env:
+#        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#    - name: Push Image to Docker Hub
+#      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/polls-api:amd64
+#
+#    - name: Deploy to Cloud
+#      run: curl ${{ secrets.RENDER_HOOK }}
 
 
 
