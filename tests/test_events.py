@@ -42,3 +42,22 @@ def test_get_single_event(client, auth_headers):
 def test_get_nonexistent_event(client):
     resp = client.get("/api/events/999999999")
     assert resp.status_code == 404
+
+def test_create_event_missing_title(client, auth_headers):
+    resp = client.post("/api/events", json={
+        "date": "2026-02-01T10:00:00"
+    }, headers=auth_headers)
+    assert resp.status_code == 400
+
+def test_create_event_missing_date(client, auth_headers):
+    resp = client.post("/api/events", json={
+        "title": "Event without a date"
+    }, headers=auth_headers)
+    assert resp.status_code == 400
+
+def test_create_event_invalid_date_format(client, auth_headers):
+    resp = client.post("/api/events", json={
+        "title": "Event with bad date",
+        "date": "not-a-date"
+    }, headers=auth_headers)
+    assert resp.status_code == 400

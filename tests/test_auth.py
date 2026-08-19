@@ -27,3 +27,26 @@ def test_login_wrong_password(client):
     client.post("/api/auth/register", json={"username": username, "password": "pw123"})
     resp = client.post("/api/auth/login", json={"username": username, "password": "wrong"})
     assert resp.status_code == 401
+
+def test_login_nonexistent_user(client):
+    username = f"user_{uuid.uuid4().hex[:8]}"
+    resp = client.post("/api/auth/login", json={"username": username, "password": "pw123"})
+    assert resp.status_code == 401
+
+def test_register_missing_username(client):
+    resp = client.post("/api/auth/register", json={"password": "pw123"})
+    assert resp.status_code == 400
+
+def test_register_missing_password(client):
+    username = f"user_{uuid.uuid4().hex[:8]}"
+    resp = client.post("/api/auth/register", json={"username": username})
+    assert resp.status_code == 400
+
+def test_login_missing_username(client):
+    resp = client.post("/api/auth/login", json={"password": "pw123"})
+    assert resp.status_code == 400
+
+def test_login_missing_password(client):
+    username = f"user_{uuid.uuid4().hex[:8]}"
+    resp = client.post("/api/auth/login", json={"username": username})
+    assert resp.status_code == 400
