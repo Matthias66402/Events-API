@@ -7,7 +7,7 @@ events_bp = Blueprint('events', __name__, url_prefix='/api/events')
 
 @events_bp.route('', methods=['GET'])
 def get_events():
-    """Get all events that the user can see"""
+    """Get all events that the user can see!"""
     events = Event.query.all()
     return jsonify([event.to_dict() for event in events]), 200
 
